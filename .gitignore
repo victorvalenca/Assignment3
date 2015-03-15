@@ -1,0 +1,10 @@
+ ## Unecessary archives that are possibly large
+ *.pdf
+ *.zip
+ *.rar
+
+## Irrelevant output/assembly/other files 
+ *.a
+ *.o
+ *.so
+ *.d
