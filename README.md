@@ -11,7 +11,7 @@
 
 ### Variables
 
-  - [ ] int charFreq[]: This array will contain int repreesenting the number of
+  - [ ] int charFreq[]: This array will contain int representing the number of
   occurences for each character in the cipher.
 
   - [ ] char cipherText[]: This array contains the cipher to be decrypted.
