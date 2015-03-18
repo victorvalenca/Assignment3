@@ -39,7 +39,7 @@
   charFreq[] and add 'A' to it.
 
  - [ ] swapCipherTextChars():
-  - ARGUMENTS: A pointer tcipherText[]
+  - ARGUMENTS: A pointer cipherText[]
   - ALGORYTHM: Prompt the user to swap two characters in cipherText[].
   Ex: Every instance of A is swapped with C, and every instance
   of C swapped with A.
