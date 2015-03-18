@@ -112,8 +112,7 @@ void doFrequencyAnalysis(char* text, int* freq){
 		freq = start; //Reset to beginning of charFreq
 		//Check if char is a letter in the ASCII table(A = 65, Z = 90)
 		if ( !((int)*text < 65 || (int)*text > 90 ) ){
-			freq += ((int)*text - 65);
-			(*freq)++;
+			(*(freq + *text - 'A'))++;
 		}
 		text++;
 	}
