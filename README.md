@@ -11,18 +11,18 @@
 
 ### Variables
 
-  - [ ] int charFreq[]: This array will contain int representing the number of
+  - [x] int charFreq[]: This array will contain int representing the number of
   occurences for each character in the cipher.
 
-  - [ ] char cipherText[]: This array contains the cipher to be decrypted.
+  - [x] char cipherText[]: This array contains the cipher to be decrypted.
 
-  - [ ] int\* alphasort[]: This is an array of pointers to ints, storing the
+  - [x] int\* alphasort[]: This is an array of pointers to ints, storing the
   largest number from charFreq[] at index 0, the second at index 1, and so on.
   Instead of associating the integer, it simply points to it.
 
 ### Functions
 
- - [ ] doFrequencyAnalysis():
+ - [x] doFrequencyAnalysis():
   - ARGUMENTS: Takes in a pointer to cipherText[] and a pointer to charFreq[].
   - ALGORYTHM: Uses a single *for* loop for populating charFreq[] without the
   use of *if* or *select* statement.
