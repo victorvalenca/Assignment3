@@ -90,7 +90,7 @@ void displayFrequencyAnalysis(int* arr){
 		printf("%c: %d\t",(char)(i + 65), *arr);
 		arr++;
 	}
-	printf("\n");
+	printf("\n\n");
 
 }
 
@@ -108,14 +108,10 @@ charFreq[] by 1 for every instance of the equivalent character.
  ***********************************************************/
 void doFrequencyAnalysis(char* text, int* freq){
 	int* start = freq; //"Checkpoint" to start of array
-	while (*text != '\0'){
+	for (; *text != '\0'; text++){
 		freq = start; //Reset to beginning of charFreq
-		//Check if char is a letter in the ASCII table(A = 65, Z = 90)
-		if ( !((int)*text < 65 || (int)*text > 90 ) ){
-			freq += ((int)*text - 65);
-			(*freq)++;
-		}
-		text++;
+		//Increment if char is a letter in the ASCII table(A = 65, Z = 90)
+		*(freq + *text - 'A') += (*text < 'A' || *text > 'Z') ? 0 : 1;
 	}
 }
 
