@@ -12,16 +12,16 @@ Created by Victor Fernandes March 26, 2015
   Begin import statements
  ***********************************************************/
 #include <stdio.h>
-
+#include <stdlib.h>
 /**********************************************************
   Forward Declarations
  **********************************************************/
-void displayFrequencyAnalysis(int*);
+void displayFrequencyAnalysis(int**);
 void doFrequencyAnalysis(char*, int*);
-void sortFrequencyAnalysis(int*, int**);
+void sortFrequencyAddresses(int*, int**);
 void swapCipherTextChars(char*);
 void displayCipherText(char*);	//Helper function for displaying cipher
-
+int compare(const void*, const void*);
 /**********************************************************
   Begin Main
  **********************************************************/
@@ -47,10 +47,10 @@ int main(){
 	doFrequencyAnalysis(pCipherText, pCharFreq);
 
 	//TODO: Sort frequency analysis
-	//		sortFrequencyAnalysis(pCharFreq, pAlphaSort);
+	sortFrequencyAddresses(pCharFreq, pAlphaSort);
 
 	//TODO: Display Frequency Analysis
-	displayFrequencyAnalysis(pCharFreq);
+	displayFrequencyAnalysis(pAlphaSort);
 
 	//TODO: Prompt and swap characters
 	//		swapCipherTextChars(pCipherText);
@@ -84,14 +84,19 @@ PURPOSE: Display frequency analysis results in a readable format
 Created by Victor Fernandes March 15, 2015
 
  ***********************************************************/
-void displayFrequencyAnalysis(int* arr){
-	//TODO: Finish sortFrequencyAnalysis to implement this
+void displayFrequencyAnalysis(int** arr){
 	for (int i = 0; i < 26; i++){
-		printf("%c: %d\t",(char)(i + 65), *arr);
-		arr++;
+		//if (**(arr+i) != 0)
+			printf("%c:%d ",**(arr+i) + 'A' , **(arr++));
+		
+	
 	}
 	printf("\n\n");
+}
 
+void clearElement(int* arr){
+	int a[26] = {0};
+	arr = a;
 }
 
 /**********************************************************
@@ -107,6 +112,7 @@ charFreq[] by 1 for every instance of the equivalent character.
 
  ***********************************************************/
 void doFrequencyAnalysis(char* text, int* freq){
+	clearElement(freq);
 	int* start = freq; //"Checkpoint" to start of array
 	for (; *text != '\0'; text++){
 		freq = start; //Reset to beginning of charFreq
@@ -126,9 +132,17 @@ Created by Victor Fernandes March 26, 2015
 ALGORYTHM: Perform a merge sort (or a similar high-performance algorythm)
 and store the pointers inside alphaSort[].
 
- ***********************************************************/
-void sortFrequencyAnalysis(int* freq, int** sortArr){
+***********************************************************/
+void sortFrequencyAddresses(int* freq, int** sortArr){
 	//TODO: See README.md
+	for (int i = 0; i < 26; i++){
+		*(sortArr+i) = freq+i;
+	}
+	qsort((void*)sortArr, 26, sizeof(*sortArr), compare);
+}
+
+int compare(const void* a, const void* b){
+	return (*(int*)b) - (*(int*)a);
 }
 
 /**********************************************************
