@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Compilation files
 *.a
 *.o
@@ -218,3 +219,15 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+=======
+ ## Unecessary archives that are possibly large
+ *.pdf
+ *.zip
+ *.rar
+
+## Irrelevant output/assembly/other files 
+ *.a
+ *.o
+ *.so
+ *.d
+>>>>>>> origin/experimental
