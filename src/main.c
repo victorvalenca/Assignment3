@@ -9,10 +9,13 @@ Created by Victor Fernandes March 26, 2015
  ***********************************************************/
 
 /**********************************************************
-  Begin import statements
+  Begin import statements and definitions
  ***********************************************************/
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+
+#define ARRSZ 26
 /**********************************************************
   Forward Declarations
  **********************************************************/
@@ -21,7 +24,7 @@ void doFrequencyAnalysis(char*, int*);
 void sortFrequencyAddresses(int*, int**);
 void swapCipherTextChars(char*);
 void displayCipherText(char*);	//Helper function for displaying cipher
-int compare(const void*, const void*);
+int* getLowestAddress(int**);
 /**********************************************************
   Begin Main
  **********************************************************/
@@ -29,33 +32,33 @@ int main(){
 
 	//Initialize arrays
 	char cipherText[] = "INSERT CIPHER HERE. PRAISE GABEN"; 	// Contains cipher to be decrypted
-	int charFreq[26] = {0};		// Container for number of character occurences
-	int* alphaSort[26] = {0};	// Array of pointers to ints
+	int charFreq[ARRSZ] = {0};		// Container for number of character occurences
+	int* alphaSort[ARRSZ] = {0};	// Array of pointers to ints
 
 	//Initialize and assign pointers
 	char* pCipherText = cipherText;
 	int*  pCharFreq = charFreq;
 	int** pAlphaSort = alphaSort;
 
-	//	while(0){
+	//while(1){
 
 	//Clean up screen and display the cipher to the user
-
-	displayCipherText(pCipherText);
+	//	system("clear");
+		displayCipherText(pCipherText);
 
 	//TODO: Frequency analysis display
-	doFrequencyAnalysis(pCipherText, pCharFreq);
+		doFrequencyAnalysis(pCipherText, pCharFreq);
 
 	//TODO: Sort frequency analysis
-	sortFrequencyAddresses(pCharFreq, pAlphaSort);
+		sortFrequencyAddresses(pCharFreq, pAlphaSort);
 
 	//TODO: Display Frequency Analysis
-	displayFrequencyAnalysis(pAlphaSort);
+		displayFrequencyAnalysis(pAlphaSort);
 
 	//TODO: Prompt and swap characters
-	//		swapCipherTextChars(pCipherText);
+		swapCipherTextChars(pCipherText);
 
-	//	}
+	//}
 }
 
 /**********************************************************
@@ -85,19 +88,39 @@ Created by Victor Fernandes March 15, 2015
 
  ***********************************************************/
 void displayFrequencyAnalysis(int** arr){
-	for (int i = 0; i < 26; i++){
-		//if (**(arr+i) != 0)
-			printf("%c:%d ",**(arr+i) + 'A' , **(arr++));
-		
-	
+
+	int* lowest = getLowestAddress(arr);
+		for (int i = 0; i < ARRSZ; i++){
+		if (**(arr+i) != 0)
+			printf("%c:%d ",(char)(*(arr+i) - lowest) + 'A' , **(arr+i));
+
 	}
 	printf("\n\n");
 }
 
-void clearElement(int* arr){
-	int a[26] = {0};
-	arr = a;
+/*********************************************************
+
+NAME: getLowestAddress
+
+PURPOSE: Returns the lowest address contained within a given array of pointers
+
+Created by D. Houtman March 23, 2015
+
+ALGORITHM: Cycle through pointers, increment counter and compare each address to check
+if address is lower than previous one.
+
+NOTES: Cherrypicked from LowestAddress.c program provided by D. Houtman
+
+*********************************************************/
+int* getLowestAddress(int** arr){
+	int *lowestAddr = arr;
+
+	for (int i = 1; i < ARRSZ; i++){
+		lowestAddr = (*(arr + i) < lowestAddr) ? *(arr+i) : lowestAddr;
+	}
+	return lowestAddr;
 }
+
 
 /**********************************************************
 
@@ -112,7 +135,6 @@ charFreq[] by 1 for every instance of the equivalent character.
 
  ***********************************************************/
 void doFrequencyAnalysis(char* text, int* freq){
-	clearElement(freq);
 	int* start = freq; //"Checkpoint" to start of array
 	for (; *text != '\0'; text++){
 		freq = start; //Reset to beginning of charFreq
@@ -135,15 +157,31 @@ and store the pointers inside alphaSort[].
 ***********************************************************/
 void sortFrequencyAddresses(int* freq, int** sortArr){
 	//TODO: See README.md
-	for (int i = 0; i < 26; i++){
-		*(sortArr+i) = freq+i;
+
+	//Wipe and copy the frequency array addresses into sortArr
+	for (int i = 0; i < ARRSZ; i++){
+		*(sortArr + i) = '\0';
+		*(sortArr+i) = freq + i;
 	}
-	qsort((void*)sortArr, 26, sizeof(*sortArr), compare);
+	int flag = 1; //Set flag to 1 to begin initial pass
+	int* temp; //Temp variable for swapping
+
+	for (int i = ARRSZ -1; i > 0 && flag; i--){
+		flag = 0;
+		for (int j = 0; j < i; j++){
+			if (**(sortArr + j) < **(sortArr + (j + 1))){
+				//Swap locations in array
+				temp = *(sortArr + j);
+				*(sortArr + j) = *(sortArr + (j + 1));
+				*(sortArr + (j + 1)) = temp;
+				flag = 1; //Indicate a swap has occured
+			}
+		}
+	}
+
+
 }
 
-int compare(const void* a, const void* b){
-	return (*(int*)b) - (*(int*)a);
-}
 
 /**********************************************************
 
@@ -159,5 +197,23 @@ with character B, and vice-versa.
  ***********************************************************/
 void swapCipherTextChars(char* cipher){
 	//TODO: See README.md
+	char c1, c2 = '\0';
+
+	printf("Enter a character to swap: ");
+	scanf("%c", &c1);
+	c1 = toupper(c1);
+
+	printf("Swap it with this character: ");
+	scanf("%c", &c2);
+	c2 = toupper(c2);
+
+	for (; *cipher != '\0'; cipher++){
+		if (*cipher == c1){
+			*cipher = c2;
+		}
+		else if (*cipher == c2){
+			*cipher = c1;
+		}
+	}
 }
 
