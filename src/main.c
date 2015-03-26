@@ -32,7 +32,7 @@ void clear();
 int main(){
 
 	//Initialize arrays
-	char cipherText[] = "INSERT CIPHER HERE. PRAISE GABEN"; 	// Contains cipher to be decrypted
+	char cipherText[] = "JLN GUQII YICUJLWCJX VUIIXO VWGU GUI OGIAAWLB TE GUI IXICGQWCJX QTGTQO ZIWLB JEEICGIN ZTGU ZR UJBIXWL-GRAI OIGGJZXI AWLO WL GUI YICUJLWCJX VUIIXO"; 	// Contains cipher to be decrypted
 	int charFreq[ARRSZ] = {0};		// Container for number of character occurences
 	int* alphaSort[ARRSZ] = {0};	// Array of pointers to ints
 
