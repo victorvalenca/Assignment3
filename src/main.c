@@ -25,6 +25,7 @@ void sortFrequencyAddresses(int*, int**);
 void swapCipherTextChars(char*);
 void displayCipherText(char*);	//Helper function for displaying cipher
 int* getLowestAddress(int**);
+void clear();
 /**********************************************************
   Begin Main
  **********************************************************/
@@ -40,7 +41,7 @@ int main(){
 	int*  pCharFreq = charFreq;
 	int** pAlphaSort = alphaSort;
 
-	//while(1){
+	while(1){
 
 	//Clean up screen and display the cipher to the user
 	//	system("clear");
@@ -54,11 +55,11 @@ int main(){
 
 	//TODO: Display Frequency Analysis
 		displayFrequencyAnalysis(pAlphaSort);
-
+		fflush(stdin);
 	//TODO: Prompt and swap characters
 		swapCipherTextChars(pCipherText);
 
-	//}
+	}
 }
 
 /**********************************************************
@@ -136,6 +137,10 @@ charFreq[] by 1 for every instance of the equivalent character.
  ***********************************************************/
 void doFrequencyAnalysis(char* text, int* freq){
 	int* start = freq; //"Checkpoint" to start of array
+
+	//Clear the frequencies to prevent unwanted stacking
+	for (; (freq - start) < 26; freq++) {*freq = 0;}
+
 	for (; *text != '\0'; text++){
 		freq = start; //Reset to beginning of charFreq
 		//Increment if char is a letter in the ASCII table(A = 65, Z = 90)
@@ -197,14 +202,17 @@ with character B, and vice-versa.
  ***********************************************************/
 void swapCipherTextChars(char* cipher){
 	//TODO: See README.md
-	char c1, c2 = '\0';
+	char c1 = '\0';
+	char c2 = '\0';
 
 	printf("Enter a character to swap: ");
-	scanf("%c", &c1);
+	scanf("%c%*c", &c1);//Read first char, ignore the rest
 	c1 = toupper(c1);
 
+	fflush(stdin);
+
 	printf("Swap it with this character: ");
-	scanf("%c", &c2);
+	scanf("%c%*c", &c2);//Read first char, ignore the rest
 	c2 = toupper(c2);
 
 	for (; *cipher != '\0'; cipher++){
@@ -217,3 +225,6 @@ void swapCipherTextChars(char* cipher){
 	}
 }
 
+void clear(){
+	while (getchar() != '\n');
+}
