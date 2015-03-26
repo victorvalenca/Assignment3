@@ -44,19 +44,14 @@ int main(){
 	while(1){
 
 	//Clean up screen and display the cipher to the user
-	//	system("clear");
+		system("clear");
 		displayCipherText(pCipherText);
 
-	//TODO: Frequency analysis display
 		doFrequencyAnalysis(pCipherText, pCharFreq);
-
-	//TODO: Sort frequency analysis
 		sortFrequencyAddresses(pCharFreq, pAlphaSort);
 
-	//TODO: Display Frequency Analysis
 		displayFrequencyAnalysis(pAlphaSort);
-		fflush(stdin);
-	//TODO: Prompt and swap characters
+
 		swapCipherTextChars(pCipherText);
 
 	}
@@ -72,7 +67,6 @@ Created by Victor Fernandes March 15, 2015
 
  ***********************************************************/
 void displayCipherText(char* text){
-	//TODO: Loop text and print to console
 	while (*text != '\0'){
 		printf("%c", *(text++));
 	}
@@ -156,12 +150,12 @@ PURPOSE: To decypher a string using frequency analysis
 
 Created by Victor Fernandes March 26, 2015
 
-ALGORYTHM: Perform a merge sort (or a similar high-performance algorythm)
-and store the pointers inside alphaSort[].
+ALGORYTHM: Perform a special type of bubble sort and store pointers
+inside alphaSort[]. Cherry-picked from post on StackOverFlow.
+Link: http://stackoverflow.com/questions/17299
 
-***********************************************************/
+ ***********************************************************/
 void sortFrequencyAddresses(int* freq, int** sortArr){
-	//TODO: See README.md
 
 	//Wipe and copy the frequency array addresses into sortArr
 	for (int i = 0; i < ARRSZ; i++){
@@ -201,7 +195,6 @@ with character B, and vice-versa.
 
  ***********************************************************/
 void swapCipherTextChars(char* cipher){
-	//TODO: See README.md
 	char c1 = '\0';
 	char c2 = '\0';
 
@@ -223,8 +216,4 @@ void swapCipherTextChars(char* cipher){
 			*cipher = c1;
 		}
 	}
-}
-
-void clear(){
-	while (getchar() != '\n');
 }
