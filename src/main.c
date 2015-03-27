@@ -108,7 +108,7 @@ NOTES: Cherrypicked from LowestAddress.c program provided by D. Houtman
 
 *********************************************************/
 int* getLowestAddress(int** arr){
-	int *lowestAddr = arr;
+	int *lowestAddr = *arr;
 
 	for (int i = 1; i < ARRSZ; i++){
 		lowestAddr = (*(arr + i) < lowestAddr) ? *(arr+i) : lowestAddr;
