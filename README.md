@@ -27,7 +27,7 @@
   - ALGORYTHM: Uses a single *for* loop for populating charFreq[] without the
   use of *if* or *select* statement.
 
- - [ ] sortFrequencyAnalysis():
+ - [ ] sortFrequencyAddresses():
   - ARGUMENTS: Takes in pointers to charFreq[] and alphaSort[]
   - ALGORYTHM: Sort through values in charFreq[] and store the addresses
   inside alphaSort[]. Preferrably using a high-performance algorythm such
@@ -39,7 +39,7 @@
   charFreq[] and add 'A' to it.
 
  - [ ] swapCipherTextChars():
-  - ARGUMENTS: A pointer tcipherText[]
+  - ARGUMENTS: A pointer cipherText[]
   - ALGORYTHM: Prompt the user to swap two characters in cipherText[].
   Ex: Every instance of A is swapped with C, and every instance
   of C swapped with A.
